@@ -1,0 +1,10 @@
+bank account holder:
+    data:
+        Customer_name
+        Password
+        Balance
+    operations:
+        Create_an_account()
+        Desposit()
+        Withdraw()
+        Check_balance()
