@@ -45,6 +45,7 @@ def main():
     ]
 
     for thread in threads:
+        # Start a thread by calling the start() method of the Thread instance
         thread.start()
 
     work_queue.join()
