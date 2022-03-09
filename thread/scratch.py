@@ -1,19 +1,30 @@
 from threading import Thread
-import threading
-import time
+from time import sleep, perf_counter
 
 
-def my_function():
-    # print(f"printing from thread, is running {my_function.__hash__}")
-    print(threading.currentThread().getName(), ' Starting', sep="...")
-    time.sleep(2)
-    print(threading.currentThread().getName(), ' Exiting', sep="...")
+def task():
+    print('Starting a task ...')
+    sleep(1)
+    print('Done')
+    
+start_time = perf_counter()
 
+# Create two new threads
+t1 = Thread(target=task)
+t2 = Thread(target=task)
 
-if __name__ == "__main__":
-    threads = [Thread(target=my_function) for _ in range(10)]
-    for thread in threads:
-        thread.start()
+# Start the threads
+t1.start()
+t2.start()
 
-    for thread in threads:
-        thread.join()
+# Wait for the threads to complete
+t1.join()
+t2.join()
+
+end_time = perf_counter()
+
+# Notes: 
+# When the program excutes, it'll have three threads: 
+# the main thread is created by the Python interpreter, 
+# and two new threads are created by the program
+print(f"It took {end_time - start_time: 1.2f} seconds(s) to complete.")
