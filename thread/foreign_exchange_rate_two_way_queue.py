@@ -51,6 +51,10 @@ def main():
     work_queue.join()
 
     while threads:
+        # If you want to wait for the thread to complete in the main thread, 
+        # you can call the join() method
+        # By calling the join() method, the main thread will wait for the joined thread 
+        # to complete before it is terminated
         threads.pop().join()
 
     while not results_queue.empty():
