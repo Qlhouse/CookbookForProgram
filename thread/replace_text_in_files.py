@@ -4,7 +4,7 @@ import os
 import time
 
 def replace(filename, substr, new_substr):
-    print(f"Processing the file {filename}")
+    # print(f"Processing the file {filename}")
     # Get the contents of the file
     with open(filename, 'r') as f:
         content = f.read()
