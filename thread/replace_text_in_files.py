@@ -57,3 +57,7 @@ if __name__ == '__main__':
     main_single_thread()
     end_time = perf_counter() 
     print(f"It took {end_time - start_time: 0.2f} seconds(s) to complete in multiple thread.")
+    
+    
+# http://pymotw.com/2/threading/
+# https://www.activestate.com/blog/how-to-manage-threads-in-python/
