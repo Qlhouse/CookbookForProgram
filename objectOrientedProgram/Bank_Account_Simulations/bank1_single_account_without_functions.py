@@ -7,14 +7,14 @@ account_password = 'soup'
 
 while True:
     print("""
-        'Press b to get the balance'
-        'Press d to make a deposit' 
-        'Press w to make a withdrawal' 
-        'Press s to show the account' 
-        'Press q to quit' 
+        Press b to get the balance
+        Press d to make a deposit 
+        Press w to make a withdrawal 
+        Press s to show the account 
+        Press q to quit 
     """)
 
-    action = input('What do you want to do?')
+    action = input('What do you want to do? ')
     action = action.lower()  # Force lowercase
     action = action[0]  # Just use first letter
     print()
