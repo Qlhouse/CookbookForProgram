@@ -24,6 +24,7 @@ def fetch_rates(base):
     print(f"1 {base} = {rates_line}")
 
 
+# Single thread mode
 def main():
     for base in BASES:
         fetch_rates(base)
