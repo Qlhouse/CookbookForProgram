@@ -2,9 +2,23 @@ class Banana:
     """A tasty tropical fruit"""
     food_group = 'fruit'
     colors = ['green', 'green-yellow', 'yellow', 'brown spotted', 'black']
+    __ripe_colors = ['yellow', 'brown spotted']
 
-    def __init__(self):
-        pass
+    def __init__(self, color='green'):
+        if not self.check_color(color):
+            raise ValueError(f'A {self.__class__.__name__} cannot be {color}')
+        self.color = color
+        self.peeled = False
+
+    def _is_ripe(self):
+        """Protected method to see if the banana is ripe."""
+        return self.color in self.__ripe_colors
+
+    def can_eat(self, must_be_ripe=False):
+        """Check if I can eat the banana."""
+        if must_be_ripe and not self._is_ripe():
+            return False
+        return True
 
     def peel(self):
         self.peeled = True
@@ -32,3 +46,7 @@ class Banana:
     def estimate_calories(num_bananas):
         """Given `num_bananas`, estimate the number of calories"""
         return num_bananas * 105
+
+    def __str__(self):
+        # "Magic Attributes" contain metadata about the object
+        return f'A {self.color} {self.__class__.__name__}'
