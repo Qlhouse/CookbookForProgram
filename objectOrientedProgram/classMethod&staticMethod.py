@@ -1,2 +1,0 @@
-class ClassMethod:
-  pass
