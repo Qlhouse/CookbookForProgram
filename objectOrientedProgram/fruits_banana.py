@@ -50,3 +50,10 @@ class Banana:
     def __str__(self):
         # "Magic Attributes" contain metadata about the object
         return f'A {self.color} {self.__class__.__name__}'
+
+class RedBanana(Banana):
+    colors = ['green', 'orange', 'red', 'brown', 'black']
+    botanical_name = 'red dacca'
+    def set_color(self, color):
+        if color not in self.colors:
+            raise ValueError(f'A Red Banana cannot be {color}!')
