@@ -27,9 +27,10 @@ if __name__ == "__main__":
     root = tk.Tk()
     var1 = JSONVar(root)
     var1.set([1, 2, 3])
-    var2 = JSONVar(root, valuevalue={'a': 10, 'b': 15})
+    var2 = JSONVar(root, value={'a': 10, 'b': 15})
 
-    print("Var1, var1.get()[1]")
+    print("Var1: ", var1.get()[1])
     # Should print 2
 
-    print("var: "), var.get()[b]
+    print("var2: ", var2.get()['b'])
+    # Should print 15
