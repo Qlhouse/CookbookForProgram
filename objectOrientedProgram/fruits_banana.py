@@ -54,6 +54,11 @@ class Banana:
 class RedBanana(Banana):
     colors = ['green', 'orange', 'red', 'brown', 'black']
     botanical_name = 'red dacca'
+
     def set_color(self, color):
         if color not in self.colors:
             raise ValueError(f'A Red Banana cannot be {color}!')
+
+    def peel(self):
+        super().peel()
+        print('It looks like a regular banana inside!') 
