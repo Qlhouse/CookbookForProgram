@@ -1,4 +1,3 @@
-from cgitb import text
 import tkinter as tk
 import json
 
