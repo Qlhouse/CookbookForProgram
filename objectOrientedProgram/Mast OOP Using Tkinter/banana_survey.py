@@ -1,6 +1,9 @@
 """A banana preferences survey written in Python with Tkinter"""
 import tkinter as tk
 
+# [TODO](Widgets and layout are mixed together,
+# widgets put together, layouts put together is better)
+
 root = tk.Tk()
 root.title("Banana interest survey")
 root.geometry('640x480+200+200')
@@ -41,19 +44,54 @@ for choice in color_choices:
 plantain_label = tk.Label(root, text="Do you eat plantains?")
 plantain_frame = tk.Frame(root)
 plantain_yes_inp = tk.Radiobutton(plantain_frame, text="Yes")
-plantain_no_inp = tk.Radiobutton(plantain_frame, text="Ewww, no!")
+plantain_no_inp = tk.Radiobutton(
+    plantain_frame, text="Ewww, no!", state="active")
+
 plantain_yes_inp.pack(side="left", fill="x", ipadx=10, ipady=5)
-plantain_no_inp = tk.Radiobutton(plantain_frame, text="Ewww, no!")
-plantain_label = tk.Label(root, text="Do you eat plantains?")
-plantain_frame = tk.Frame(root)
+plantain_no_inp.pack(side="left", fill="x", ipadx=10, ipady=5)
+plantain_label.grid(row=6, columnspan=2, sticky=tk.W)
+plantain_frame.grid(row=7, columnspan=2, sticky=tk.W)
 
 
 # Text Widget
 banana_haiku_label = tk.Label(root, text="Write a haiku about bananas")
 banana_haiku_inp = tk.Text(root, height=3)
+banana_haiku_label.grid(row=8, sticky=tk.W)
+banana_haiku_inp.grid(row=9, columnspan=2, sticky="NSEW")
 
 submit_btn = tk.Button(root, text="Submit Survey")
+submit_btn.grid(row=99)
 
 output_line = tk.Label(root, text='', anchor='w', justify='left')
+output_line.grid(row=100, columnspan=2, sticky="NSEW")
+
+root.columnconfigure(1, weight=1)
+root.rowconfigure(99, weight=2)
+root.rowconfigure(100, weight=1)
+
+
+def on_submit():
+    """To be run when the user submits the form"""
+    name = name_inp.get()
+    number = num_inp.get()
+
+    selected_idx = color_inp.curselection()
+    if selected_idx:
+        color = color_inp.get(selected_idx)
+    else:
+        color = ''
+
+    haiku = banana_haiku_inp.get('1.0', tk.END)
+
+    message = (
+        f'Thanks for taking the survey, {name}.\n'
+        f'Enjoy your {number} {color} bananas!'
+    )
+
+    output_line.configure(text=message)
+    print(haiku)
+
+
+submit_btn.configure(command=on_submit)
 
 root.mainloop()
