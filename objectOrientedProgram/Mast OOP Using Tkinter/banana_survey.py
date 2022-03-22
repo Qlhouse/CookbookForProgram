@@ -13,32 +13,38 @@ title = tk.Label(root, text="Please take the survey",
                  font=("Arial 16 bold"), bg="brown", fg="#FF0")
 title.grid(columnspan=2)
 
+name_var = tk.StringVar(root)
 name_label = tk.Label(root, text="What is your name?")
-name_inp = tk.Entry(root)
+name_inp = tk.Entry(root, textvariable=name_var)
 name_label.grid(row=1, column=0)
 name_inp.grid(row=1, column=1)
 
-eater_inp = tk.Checkbutton(root, text="Check this box if you eat bananas")
+eater_var = tk.BooleanVar()
+eater_inp = tk.Checkbutton(root, variable=eater_var,
+                           text="Check this box if you eat bananas")
 eater_inp.grid(row=2, columnspan=2, sticky='we')
 
+
 # Spinbox
+num_var = tk.IntVar(value=3)
 num_label = tk.Label(root, text="How many bonanas do you eat per day?")
-num_inp = tk.Spinbox(root, from_=0, to=1000, increment=1)
+num_inp = tk.Spinbox(root, textvariable=num_var, from_=0, to=1000, increment=1)
 num_label.grid(row=3, sticky=tk.W)
 num_inp.grid(row=3, column=1, sticky=(tk.W + tk.E))
 
-# Listbox
-color_label = tk.Label(root, text="What is the best color for a banana?")
-color_inp = tk.Listbox(root, height=1)  # Only show selected item
-color_label.grid(row=4, columnspan=2, sticky=tk.W, pady=10)
-color_inp.grid(row=5, columnspan=2, sticky=tk.W + tk.E, padx=25)
 
+# OptionMenu
 # # Add choices
 color_choices = (
     'Any', 'Green', 'Green-Yellow', "Yellow", "Brown Spotted", "Black"
 )
-for choice in color_choices:
-    color_inp.insert(tk.END, choice)
+color_var = tk.StringVar(value="Any")
+color_label = tk.Label(root, text="What is the best color for a banana?")
+color_inp = tk.OptionMenu(root, color_var, *color_choices)
+
+color_label.grid(row=4, columnspan=2, sticky=tk.W, pady=10)
+color_inp.grid(row=5, columnspan=2, sticky=tk.W + tk.E, padx=25)
+
 
 # Radiobutton
 plantain_label = tk.Label(root, text="Do you eat plantains?")
@@ -59,20 +65,22 @@ banana_haiku_inp = tk.Text(root, height=3)
 banana_haiku_label.grid(row=8, sticky=tk.W)
 banana_haiku_inp.grid(row=9, columnspan=2, sticky="NSEW")
 
+
+# Submit Button
 submit_btn = tk.Button(root, text="Submit Survey")
 submit_btn.grid(row=99)
 
+
+# Output Lable
 output_line = tk.Label(root, text='', anchor='w', justify='left')
 output_line.grid(row=100, columnspan=2, sticky="NSEW")
 
-root.columnconfigure(1, weight=1)
-root.rowconfigure(99, weight=2)
-root.rowconfigure(100, weight=1)
 
-
+# Configure Submit Button
 def on_submit():
     """To be run when the user submits the form"""
-    name = name_inp.get()
+    # The contents of name_inp widget and variable name_var are kept in sync
+    name = name_var.get()
     number = num_inp.get()
 
     selected_idx = color_inp.curselection()
@@ -93,5 +101,9 @@ def on_submit():
 
 
 submit_btn.configure(command=on_submit)
+
+root.columnconfigure(1, weight=1)
+root.rowconfigure(99, weight=2)
+root.rowconfigure(100, weight=1)
 
 root.mainloop()
