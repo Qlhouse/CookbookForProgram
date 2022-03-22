@@ -1,4 +1,5 @@
 """A banana preferences survey written in Python with Tkinter"""
+from email import message
 import tkinter as tk
 
 # [TODO](Widgets and layout are mixed together,
@@ -50,7 +51,8 @@ color_inp.grid(row=5, columnspan=2, sticky=tk.W + tk.E, padx=25)
 plantain_label = tk.Label(root, text="Do you eat plantains?")
 plantain_frame = tk.Frame(root)
 plantain_var = tk.BooleanVar()
-plantain_yes_inp = tk.Radiobutton(plantain_frame, text="Yes", value=True, variable=plantain_var)
+plantain_yes_inp = tk.Radiobutton(
+    plantain_frame, text="Yes", value=True, variable=plantain_var)
 plantain_no_inp = tk.Radiobutton(
     plantain_frame, text="Ewww, no!", value=False, variable=plantain_var)
 
@@ -74,32 +76,40 @@ submit_btn.grid(row=99)
 
 # Output Lable
 output_var = tk.StringVar(value='')
-output_line = tk.Label(root, textvariable=output_var, anchor='w', justify='left')
+output_line = tk.Label(root, textvariable=output_var,
+                       anchor='w', justify='left')
 output_line.grid(row=100, columnspan=2, sticky="NSEW")
 
 
 # Configure Submit Button
 def on_submit():
     """To be run when the user submits the form"""
+    try:
+        number = num_inp.get()
+    except tk.TclError:
+        number = 1000
     # The contents of name_inp widget and variable name_var are kept in sync
     name = name_var.get()
-    number = num_inp.get()
+    color = color_var.get()
+    banana_eater = eater_var.get()
+    plantain_eater = plantain_var.get()
 
-    selected_idx = color_inp.curselection()
-    if selected_idx:
-        color = color_inp.get(selected_idx)
+    # Get text widget contents
+    haiku = banana_haiku_inp.get("1.0", tk.END)
+
+    message = f"Thanks for taking this survey, {name}.\n"
+    if not banana_eater:
+        message += "Sorry you don't like bananas!\n"
     else:
-        color = ''
+        message += f"Enjoy your {number} {color} bananas!\n"
+    if plantain_eater:
+        message += "Enjoy you plantains!"
+    else:
+        message += "May you successfully avoid plantains!"
+    if haiku.strip():
+        message += f"\n\n    Your Haiku:\n{haiku}"
 
-    haiku = banana_haiku_inp.get('1.0', tk.END)
-
-    message = (
-        f'Thanks for taking the survey, {name}.\n'
-        f'Enjoy your {number} {color} bananas!'
-    )
-
-    output_line.configure(text=message)
-    print(haiku)
+    output_var.set(message)
 
 
 submit_btn.configure(command=on_submit)
