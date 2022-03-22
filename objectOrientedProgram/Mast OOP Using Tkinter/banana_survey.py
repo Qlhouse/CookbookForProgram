@@ -49,9 +49,10 @@ color_inp.grid(row=5, columnspan=2, sticky=tk.W + tk.E, padx=25)
 # Radiobutton
 plantain_label = tk.Label(root, text="Do you eat plantains?")
 plantain_frame = tk.Frame(root)
-plantain_yes_inp = tk.Radiobutton(plantain_frame, text="Yes")
+plantain_var = tk.BooleanVar()
+plantain_yes_inp = tk.Radiobutton(plantain_frame, text="Yes", value=True, variable=plantain_var)
 plantain_no_inp = tk.Radiobutton(
-    plantain_frame, text="Ewww, no!", state="active")
+    plantain_frame, text="Ewww, no!", value=False, variable=plantain_var)
 
 plantain_yes_inp.pack(side="left", fill="x", ipadx=10, ipady=5)
 plantain_no_inp.pack(side="left", fill="x", ipadx=10, ipady=5)
@@ -72,7 +73,8 @@ submit_btn.grid(row=99)
 
 
 # Output Lable
-output_line = tk.Label(root, text='', anchor='w', justify='left')
+output_var = tk.StringVar(value='')
+output_line = tk.Label(root, textvariable=output_var, anchor='w', justify='left')
 output_line.grid(row=100, columnspan=2, sticky="NSEW")
 
 
