@@ -21,5 +21,4 @@ Functional Requirements:
     listed in the data dictionary.
     - The CSV headers will avoid cryptic abbreviations.
   * Enforce correct datatypes per field
-  
 Non-functional Requirements:
