@@ -11,7 +11,6 @@ Requirements
 ---------------
 
 Functional Requirements:
-
   * Allow all relevant, valid data to be entered, 
     as per the data dictionary.
   * Append entered data to a CSV file:
@@ -24,5 +23,8 @@ Functional Requirements:
   * Enforce correct datatypes per field
   
 Non-functional Requirements:
-
-  * Enforce reasonable limits on data entered, per the data dict
+  * Enforce reasonable limits on data entered, per the data dict.
+  * Auto-fill data to save time.
+  * Suggest likely correct values.
+  * Provide a smooth and efficient workflow.
+  * Store data in a format easily understanble by Python.
